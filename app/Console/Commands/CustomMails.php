@@ -42,9 +42,10 @@ class CustomMails extends Command
         // check that if any email send_at time is equal to current time
 
         $sendingData = CustomMail::whereStatus(0)
-                        ->whereDate('send_at', '<=' , now())
+                        ->whereDate('send_at', '=' , now())
+                        ->whereTime('send_at', '<=', now())
                         ->get()->toArray();
-
+                        
         if(count($sendingData)){
 
             $ids = [];
