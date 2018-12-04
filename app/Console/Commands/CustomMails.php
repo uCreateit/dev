@@ -44,7 +44,7 @@ class CustomMails extends Command
         $sendingData = CustomMail::whereStatus(0)
                         ->whereDate('send_at', '<=' , now())
                         ->get()->toArray();
-        dd(DB::getQueryLog());
+
         if(count($sendingData)){
 
             $ids = [];
