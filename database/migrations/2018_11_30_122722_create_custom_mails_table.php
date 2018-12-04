@@ -18,6 +18,7 @@ class CreateCustomMailsTable extends Migration
             $table->string('email', 255);    
             $table->string('subject', 255);    
             $table->text('data');    
+            $table->tinyInteger('status');    
             $table->timestampTz('send_at');    
             $table->timestamps();
         });
