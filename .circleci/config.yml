@@ -19,6 +19,7 @@ jobs:
     steps:
       - run: sudo apt-get update
       - run: sudo docker-php-ext-install bcmath && sudo docker-php-ext-enable bcmath
+      - run: sudo docker-php-ext-install json && sudo docker-php-ext-enable json
 
       - checkout
 
