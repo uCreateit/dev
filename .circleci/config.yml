@@ -17,6 +17,8 @@ jobs:
     working_directory: ~/repo
 
     steps:
+      - run: sudo apt install php7.2-bcmath
+
       - checkout
 
       # Download and cache dependencies
@@ -27,7 +29,6 @@ jobs:
           - v1-dependencies-
 
       - run: composer install -n --prefer-dist
-      - run: sudo apt install php-bcmath
 
       - save_cache:
           paths:
