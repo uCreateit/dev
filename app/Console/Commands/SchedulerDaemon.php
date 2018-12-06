@@ -33,7 +33,7 @@ class SchedulerDaemon extends Command
             $this->line('<info>[' . Carbon::now()->format('Y-m-d H:i:s') . ']</info> Calling scheduler');
 
             $this->call('email:release');
-            
+                
             sleep($this->option('sleep'));
         }
     }
