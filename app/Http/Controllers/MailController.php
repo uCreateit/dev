@@ -55,7 +55,7 @@ class MailController extends Controller
 
         $insertArray = [];
         $insertArray['email'] = $email;
-        $insertArray['send_att'] = $when;
+        $insertArray['send_at'] = $when;
         $insertArray['data'] = $data;
         $insertArray['subject'] = 'Test Subject';
         $insertArray['status'] = 0;
