@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Redirect;
 use Aws\S3\S3Client;
 use Illuminate\Http\Request;
 use Aws\Credentials\Credentials;
@@ -70,12 +71,10 @@ class UploadMediaController extends Controller
 						$error['error'] = $error_msg;
 						break;
 				}
+				return Redirect::back()->withErrors($error)->withInput();
 			}
-
-			//dd($error);
 		}
-
-		return view('UploadFile',[ 'url' => $url ])->withErrors($error);
+		return view('UploadFile',[ 'url' => $url ]);
 	}
 
 }
