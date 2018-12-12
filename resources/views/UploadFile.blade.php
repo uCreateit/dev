@@ -8,9 +8,10 @@
                 <div class="card-header">{{ __('Upload File To S3') }}</div>
 
                 <div class="card-body">
-                    @if (!empty($error))
-                        <span class="invalid-feedback" role="alert" style="display: block;">
-                            <strong>{{ $error }}</strong>
+
+                    @if ($errors->has('error'))
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $errors->first('error') }}</strong>
                         </span>
                     @endif
 
@@ -41,7 +42,7 @@
                             <label for="secret_key" class="col-md-4 col-form-label text-md-right">{{ __('AWS Secret Key ') }}</label>
 
                             <div class="col-md-6">
-                                <input id="secret_key" type="text" class="form-control{{ $errors->has('secret_key') ? ' is-invalid' : '' }}" name="secret_key" required>
+                                <input id="secret_key" value="{{ old('secret_key') }}" type="text" class="form-control{{ $errors->has('secret_key') ? ' is-invalid' : '' }}" name="secret_key" required>
 
                                 @if ($errors->has('secret_key'))
                                     <span class="invalid-feedback" role="alert">
@@ -55,7 +56,7 @@
                             <label for="bucket" class="col-md-4 col-form-label text-md-right">{{ __('Bukket Name ') }}</label>
 
                             <div class="col-md-6">
-                                <input id="bucket" type="text" class="form-control{{ $errors->has('bucket') ? ' is-invalid' : '' }}" name="bucket" required>
+                                <input id="bucket" type="text" value="{{ old('bucket') }}" class="form-control{{ $errors->has('bucket') ? ' is-invalid' : '' }}" name="bucket" required>
 
                                 @if ($errors->has('bucket'))
                                     <span class="invalid-feedback" role="alert">
@@ -69,7 +70,7 @@
                             <label for="region" class="col-md-4 col-form-label text-md-right">{{ __('Region') }}</label>
 
                             <div class="col-md-6">
-                                <input id="region" type="text" class="form-control{{ $errors->has('region') ? ' is-invalid' : '' }}" name="region" required>
+                                <input id="region" type="text" value="{{ old('region') }}"  class="form-control{{ $errors->has('region') ? ' is-invalid' : '' }}" name="region" required>
 
                                 @if ($errors->has('region'))
                                     <span class="invalid-feedback" role="alert">

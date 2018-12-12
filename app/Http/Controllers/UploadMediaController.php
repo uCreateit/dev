@@ -2,18 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Contracts\Filesystem\Filesystem;
 use Aws\S3\S3Client;
-use Aws\S3\Exception\S3Exception;
+use Illuminate\Http\Request;
 use Aws\Credentials\Credentials;
-use Redirect;
+use Aws\S3\Exception\S3Exception;
+use Illuminate\Contracts\Filesystem\Filesystem;
 
 class UploadMediaController extends Controller
-{
+{	
+
+	public function everything_in_tags($string, $tagname)
+	{
+	    $pattern = "#<\s*?$tagname\b[^>]*>(.*?)</$tagname\b[^>]*>#s";
+	    preg_match($pattern, $string, $matches);
+	    return @$matches[1];
+	}
+
    	public function uploadFile(Request $request)
 	{	
-		$error = '';
+		$error = [];
 		$url = '';
 
 		if ($request->isMethod('post')) {
@@ -45,11 +52,30 @@ class UploadMediaController extends Controller
 
 			} catch (S3Exception $e) {
 				
-				$error = $e->getMessage();
+				$error_msg = $e->getMessage();
+
+				$errorCode = $this->everything_in_tags($error_msg,'Code') ?? '';
+				$errormsg = $this->everything_in_tags($error_msg,'Message');
+				
+				//dd($errormsg);
+
+				switch ($errorCode) {
+					case "SignatureDoesNotMatch":
+						$error['secret_key'] = $errormsg;
+						break;
+					case "NoSuchBucket":
+						$error['bucket'] = $errormsg;
+						break;
+					default:
+						$error['error'] = $error_msg;
+						break;
+				}
 			}
+
+			//dd($error);
 		}
 
-		return view('UploadFile',['error' => $error, 'url' => $url ]);
+		return view('UploadFile',[ 'url' => $url ])->withErrors($error);
 	}
 
 }
