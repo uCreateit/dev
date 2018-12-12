@@ -58,8 +58,6 @@ class UploadMediaController extends Controller
 				$errorCode = $this->everything_in_tags($error_msg,'Code') ?? '';
 				$errormsg = $this->everything_in_tags($error_msg,'Message');
 				
-				//dd($errormsg);
-
 				switch ($errorCode) {
 					case "SignatureDoesNotMatch":
 						$error['secret_key'] = $errormsg;
@@ -76,5 +74,4 @@ class UploadMediaController extends Controller
 		}
 		return view('UploadFile',[ 'url' => $url ]);
 	}
-
 }
