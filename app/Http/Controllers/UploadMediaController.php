@@ -38,7 +38,7 @@ class UploadMediaController extends Controller
 		           'credentials' => $credentials
 		       ]);
 
-			$filePath = 'test/' . $imageFileName;
+			$filePath = $imageFileName;
 			
 			try {
 

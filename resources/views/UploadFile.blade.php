@@ -15,12 +15,6 @@
                         </span>
                     @endif
 
-                    @if (!empty($url))
-                        <span class="success" role="alert">
-                            <strong> File uploded successfuly : {{ $url }}</strong>
-                        </span>
-                    @endif
-
                     <form method="POST" enctype="multipart/form-data" action="{{ route('uploadFile') }}">
                         @csrf
 
@@ -106,5 +100,15 @@
             </div>
         </div>
     </div>
+
+    @if (!empty($url))
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card" style="text-align: center;">
+                   <a target="_blank" href="{{ $url }}"><img style="padding: 20px 30px 10px;" src="{{ $url }}"></a>  
+                </div>
+            </div>
+        </div>
+    @endif
 </div>
 @endsection
