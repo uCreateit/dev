@@ -60,6 +60,20 @@
                             </div>
                         </div>
 
+                         <div class="form-group row">
+                            <label for="folder" class="col-md-4 col-form-label text-md-right">{{ __('Folder Name ') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="folder" type="text" value="{{ old('folder') }}" class="form-control{{ $errors->has('folder') ? ' is-invalid' : '' }}" name="folder" placeholder="Optional" >
+
+                                @if ($errors->has('folder'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('folder') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
                         <div class="form-group row">
                             <label for="region" class="col-md-4 col-form-label text-md-right">{{ __('Region') }}</label>
 
@@ -104,8 +118,14 @@
     @if (!empty($url))
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <div class="card" style="text-align: center;">
-                   <a target="_blank" href="{{ $url }}"><img width="100%" style="padding: 20px 30px 10px;" src="{{ $url }}"></a>  
+                <div class="card" style="text-align: center;padding: 20px;">
+                   <a target="_blank" href="{{ $url }}">
+                        @if($preview)
+                            <img width="100%" style="padding: 20px 30px 10px;" src="{{ $url }}">
+                        @else
+                        {{ $url }}
+                        @endif
+                    </a>  
                 </div>
             </div>
         </div>

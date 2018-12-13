@@ -7,7 +7,9 @@ use Aws\S3\S3Client;
 use Illuminate\Http\Request;
 use Aws\Credentials\Credentials;
 use Aws\S3\Exception\S3Exception;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Contracts\Filesystem\Filesystem;
+
 
 class UploadMediaController extends Controller
 {	
@@ -24,12 +26,27 @@ class UploadMediaController extends Controller
 	{	
 		$error = [];
 		$url = '';
+		$preview = false;
 
 		if ($request->isMethod('post')) {
+
+			$validator =  Validator::make($request->all(), [
+			    'folder' => 'alpha_dash'
+			]);
+
+			if ($validator->fails()) {
+			    return Redirect::back()->withErrors($validator)->withInput();
+			}
 
 			$image = $request->file('media');
 
 			$imageFileName = rand() . '_' . $image->getClientOriginalName();
+
+			$imageExtensions = ['jpg','jpeg','png','svg','bmp','gif','tiff']; 
+
+			if(in_array( strtolower($image->getClientOriginalExtension()) ,$imageExtensions)){
+				$preview = true;
+			}
 
 			$credentials = new Credentials($request->access_key,$request->secret_key);
 		    
@@ -40,6 +57,10 @@ class UploadMediaController extends Controller
 		       ]);
 
 			$filePath = $imageFileName;
+		    
+		    if($request->folder){
+		    	$filePath = $request->folder.'/'.$imageFileName;
+		    }
 
 			try {
 
@@ -81,6 +102,6 @@ class UploadMediaController extends Controller
 				return Redirect::back()->withErrors($error)->withInput();
 			}
 		}
-		return view('UploadFile',[ 'url' => $url ]);
+		return view('UploadFile',[ 'url' => $url , 'preview' => $preview ]);
 	}
 }
