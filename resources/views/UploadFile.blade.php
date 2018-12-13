@@ -47,7 +47,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="bucket" class="col-md-4 col-form-label text-md-right">{{ __('Bukket Name ') }}</label>
+                            <label for="bucket" class="col-md-4 col-form-label text-md-right">{{ __('Bucket Name ') }}</label>
 
                             <div class="col-md-6">
                                 <input id="bucket" type="text" value="{{ old('bucket') }}" class="form-control{{ $errors->has('bucket') ? ' is-invalid' : '' }}" name="bucket" required>
