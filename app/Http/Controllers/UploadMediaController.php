@@ -14,9 +14,10 @@ class UploadMediaController extends Controller
 
 	public function everything_in_tags($string, $tagname)
 	{
-	    $pattern = "#<\s*?$tagname\b[^>]*>(.*?)</$tagname\b[^>]*>#s";
-	    preg_match($pattern, $string, $matches);
-	    return @$matches[1];
+		$pattern = "/<$tagname>(.*?)<\/$tagname>/";
+    	preg_match($pattern, $string, $matches);
+
+	    return $matches[1] ?? false;
 	}
 
    	public function uploadFile(Request $request)
@@ -58,7 +59,7 @@ class UploadMediaController extends Controller
 
 				$errorCode = $this->everything_in_tags($error_msg,'Code') ?? '';
 				$errormsg = $this->everything_in_tags($error_msg,'Message');
-				
+
 				switch ($errorCode) {
 					case "SignatureDoesNotMatch":
 						$error['secret_key'] = $errormsg;
@@ -66,10 +67,17 @@ class UploadMediaController extends Controller
 					case "NoSuchBucket":
 						$error['bucket'] = $errormsg;
 						break;
+					case "InvalidAccessKeyId":
+						$error['access_key'] = $errormsg;
+						break;
+					case "AccessDenied":
+						$error['error'] = $errormsg;
+						break;
 					default:
 						$error['error'] = $error_msg;
 						break;
 				}
+
 				return Redirect::back()->withErrors($error)->withInput();
 			}
 		}

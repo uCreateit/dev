@@ -10,7 +10,7 @@
                 <div class="card-body">
 
                     @if ($errors->has('error'))
-                        <span class="invalid-feedback" role="alert">
+                        <span class="alert alert-danger invalid-feedback" role="alert" style="display: block;">
                             <strong>{{ $errors->first('error') }}</strong>
                         </span>
                     @endif
