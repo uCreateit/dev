@@ -39,14 +39,15 @@ class UploadMediaController extends Controller
 		       ]);
 
 			$filePath = $imageFileName;
-			
+
 			try {
 
 				$res = $s3->putObject(array(
 				    'Bucket'     => $request->bucket,
 				    'Key'        => $filePath,
-				    'ACL'    	 => 'public-read',
+				    'ACL'    	 => 'public-read-write',
 				    'SourceFile' => $image->getPathName(),
+				    'ContentType' => $image->getMimeType(),
 				));
 
 				$url = $res['ObjectURL'];

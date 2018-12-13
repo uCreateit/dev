@@ -105,10 +105,11 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card" style="text-align: center;">
-                   <a target="_blank" href="{{ $url }}"><img style="padding: 20px 30px 10px;" src="{{ $url }}"></a>  
+                   <a target="_blank" href="{{ $url }}"><img width="100%" style="padding: 20px 30px 10px;" src="{{ $url }}"></a>  
                 </div>
             </div>
         </div>
     @endif
+
 </div>
 @endsection
