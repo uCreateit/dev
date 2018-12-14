@@ -19,11 +19,11 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css' , env('REDIRECT_HTTPS') ) }}" rel="stylesheet">
 
-     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
-<body>  
+<body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
@@ -41,9 +41,9 @@
                     </ul>
 
                     <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
+                    <ul class="navbar-nav ml-auto pull-right">
                         <!-- Authentication Links -->
-                       <!--  @guest
+                        @guest
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                             </li>
@@ -70,12 +70,12 @@
                                     </form>
                                 </div>
                             </li>
-                        @endguest -->
+                        @endguest
                     </ul>
                 </div>
             </div>
         </nav>
-        
+
         <main class="py-4">
             @if (session('status'))
                 <div class="alert alert-dismissable alert-{{ session('status') }}">

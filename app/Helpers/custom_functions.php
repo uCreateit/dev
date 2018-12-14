@@ -23,3 +23,8 @@ if(!function_exists('prx')){
 
 	}
 }
+
+
+function defaultImage(){
+	return asset('/default.jpg',env('REDIRECT_HTTPS'));
+}
