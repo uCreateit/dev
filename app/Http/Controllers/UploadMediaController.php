@@ -40,7 +40,8 @@ class UploadMediaController extends Controller
 
 			$image = $request->file('media');
 
-			$imageFileName = rand() . '_' . $image->getClientOriginalName();
+			//$imageFileName = rand() . '_' . $image->getClientOriginalName();
+			$imageFileName = $image->getClientOriginalName();
 
 			$imageExtensions = ['jpg','jpeg','png','svg','bmp','gif','tiff']; 
 
@@ -67,7 +68,7 @@ class UploadMediaController extends Controller
 				$res = $s3->putObject(array(
 				    'Bucket'     => $request->bucket,
 				    'Key'        => $filePath,
-				    'ACL'    	 => 'public-read-write',
+				    //'ACL'    	 => 'public-read-write',
 				    'SourceFile' => $image->getPathName(),
 				    'ContentType' => $image->getMimeType(),
 				));
