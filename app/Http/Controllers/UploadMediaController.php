@@ -41,7 +41,7 @@ class UploadMediaController extends Controller
 			$image = $request->file('media');
 
 			//$imageFileName = rand() . '_' . $image->getClientOriginalName();
-			$imageFileName = $image->getClientOriginalName();
+			$imageFileName = $image->getClientOriginalNames();
 
 			$imageExtensions = ['jpg','jpeg','png','svg','bmp','gif','tiff']; 
 
