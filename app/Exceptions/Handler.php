@@ -34,7 +34,8 @@ class Handler extends ExceptionHandler
      * @return void
      */
     public function report(Exception $exception)
-    {
+    {   
+         \Log::error($exception); //rollbar
         parent::report($exception);
     }
 

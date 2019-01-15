@@ -12,6 +12,7 @@
         "ext-bcmath": "*",
         "aws/aws-sdk-php": "^3.81",
         "fideloper/proxy": "^4.0",
+        "jenssegers/rollbar": "^1.5",
         "laravel/framework": "5.7.*",
         "laravel/telescope": "^1.0",
         "laravel/tinker": "^1.0",

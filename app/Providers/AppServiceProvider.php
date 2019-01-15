@@ -51,6 +51,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        if ($this->app->environment('staging')) {
+            $this->app->register(\Jenssegers\Rollbar\RollbarServiceProvider::class);
+        }
     }
 }
